@@ -1,0 +1,90 @@
+.article-set {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  height: 458px;
+  position: relative;
+  width: 732px;
+}
+
+.article-set .article-card {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  position: relative;
+}
+
+.article-set .div {
+  align-items: flex-start;
+  background-color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 114px;
+  position: relative;
+  width: 732px;
+}
+
+.article-set .text-wrapper {
+  color: var(--primary);
+  font-family: var(--label-large-font-family);
+  font-size: var(--label-large-font-size);
+  font-style: var(--label-large-font-style);
+  font-weight: var(--label-large-font-weight);
+  letter-spacing: var(--label-large-letter-spacing);
+  line-height: var(--label-large-line-height);
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.article-set .text-wrapper-2 {
+  align-self: stretch;
+  color: var(--contentscontentprimary);
+  font-family: var(--paragraph-medium-font-family);
+  font-size: var(--paragraph-medium-font-size);
+  font-style: var(--paragraph-medium-font-style);
+  font-weight: var(--paragraph-medium-font-weight);
+  letter-spacing: var(--paragraph-medium-letter-spacing);
+  line-height: var(--paragraph-medium-line-height);
+  position: relative;
+}
+
+.article-set .buttons-link {
+  align-items: flex-start;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #6b6b6b;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  margin-bottom: -1px;
+  margin-left: -1px;
+  padding: 4px;
+  position: relative;
+}
+
+.article-set .text-wrapper-3 {
+  color: var(--contentscontentprimary);
+  font-family: var(--paragraph-medium-font-family);
+  font-size: var(--paragraph-medium-font-size);
+  font-style: var(--paragraph-medium-font-style);
+  font-weight: var(--paragraph-medium-font-weight);
+  letter-spacing: var(--paragraph-medium-letter-spacing);
+  line-height: var(--paragraph-medium-line-height);
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.article-set .article-card-wrapper {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  margin-bottom: -106px;
+  position: relative;
+}

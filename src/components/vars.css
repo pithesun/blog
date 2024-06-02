@@ -1,0 +1,16 @@
+:root {
+  --primary: #000000;
+  --secondary: #ffffff;
+  /* --label-large-font-family: 'Pretendard' */
+  --label-large-font-size: 21px;
+  --label-large-font-style: normal;
+  --label-large-font-weight: 600;
+  /* --label-large-letter-spacing : */
+  --label-large-line-height: 140%;
+
+  --paragraph-medium-font-size: 16px;
+  --paragraph-medium-font-style: normal;
+  --paragraph-medium-font-weight: 400;
+  /* --paragraph-medium-letter-spacing */
+  --paragraph-medium-line-height: 160%;
+}
