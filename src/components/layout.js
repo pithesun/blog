@@ -7,6 +7,9 @@ import {
   navLinkItem,
   navLinkText,
   siteTitle,
+  inner,
+  a,
+  mainContainer,
 } from "./layout.module.css";
 import CommonLogo from "./Common/Logo";
 
@@ -21,29 +24,21 @@ const Layout = ({ pageTitle, children }) => {
     }
   `);
   return (
-    <div className={container}>
-      <header className={siteTitle}>
-        <CommonLogo />
+    <div style={{ margin: "auto" }}>
+      <header className={container}>
+        <Link to="/">
+          <CommonLogo />
+        </Link>
+        <nav>
+          <ul className={navLinks}>
+            <li className={navLinkItem}>
+              <Link to="/about">About</Link>
+            </li>
+          </ul>
+        </nav>
       </header>
-      <nav>
-        <ul className={navLinks}>
-          <li className={navLinkItem}>
-            <Link to="/">Home</Link>
-          </li>
-          <li className={navLinkItem}>
-            <Link to="/about">About</Link>
-          </li>
-          <li className={navLinkItem}>
-            <Link to="/blog" className={navLinkText}>
-              Blog
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      <main>
-        <h1 className={heading}>{pageTitle}</h1>
-        {children}
-      </main>
+
+      <main className={mainContainer}>{children}</main>
     </div>
   );
 };

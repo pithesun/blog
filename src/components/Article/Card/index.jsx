@@ -10,14 +10,15 @@ import { Link } from "gatsby";
 
 export const ArticleCard = ({ blog }) => {
   return (
-    <div className={articleCard} key={blog.id}>
-      <Link to={`/blog/${blog.frontmatter.slug}`}>
+    <Link to={`/blog/${blog.frontmatter.slug}`}>
+      <div className={articleCard} key={blog.id}>
         <div className={textWrapper}>{blog.frontmatter.title}</div>
-      </Link>
-      <div className={div}>{blog.excerpt}</div>
-      <div className={buttonsLink}>
-        <div className={textWrapper2}>{blog.frontmatter.date}</div>
+
+        <div className={div}>{blog.excerpt}</div>
+        <div className={buttonsLink}>
+          <div className={textWrapper2}>{blog.frontmatter.date}</div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };

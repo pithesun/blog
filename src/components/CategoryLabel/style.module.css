@@ -1,0 +1,41 @@
+@import "../vars.css";
+
+.label {
+  align-items: flex-start;
+  background-color: #f5f5f5;
+  border-radius: 19px;
+  display: inline-flex;
+  gap: 8px;
+  padding: 8px 12px;
+  position: relative;
+  border-style: none;
+}
+
+.label.active-state {
+  align-items: flex-start;
+  background-color: #f5f5f5;
+  border-radius: 19px;
+  display: inline-flex;
+  gap: 8px;
+  padding: 8px 12px;
+  position: relative;
+  /* secondary */
+  background: #ffffff;
+  border: 2px solid #f6d38f;
+  /* state=active */
+  box-sizing: border-box;
+}
+
+.label .text-wrapper {
+  color: var(--primary);
+  font-family: var(--label-medium-font-family);
+  font-size: var(--label-medium-font-size);
+  font-style: var(--label-medium-font-style);
+  font-weight: var(--label-medium-font-weight);
+  letter-spacing: var(--label-medium-letter-spacing);
+  line-height: var(--label-medium-line-height);
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
