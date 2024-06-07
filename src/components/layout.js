@@ -24,7 +24,7 @@ const Layout = ({ pageTitle, children }) => {
     }
   `);
   return (
-    <div style={{ margin: "auto" }}>
+    <div>
       <header className={container}>
         <Link to="/">
           <CommonLogo />
@@ -37,7 +37,6 @@ const Layout = ({ pageTitle, children }) => {
           </ul>
         </nav>
       </header>
-
       <main className={mainContainer}>{children}</main>
     </div>
   );
