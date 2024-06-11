@@ -4,8 +4,9 @@
 module.exports = {
   siteMetadata: {
     title: `sunny's blog`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://pithesun.github.io/blog/`,
   },
+  pathPrefix: "/blog",
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
