@@ -9,9 +9,25 @@ const BlogPost = ({ data, children }) => {
 
   return (
     <Layout pageTitle={data.mdx.frontmatter.title}>
-      <p>{data.mdx.frontmatter.date}</p>
-      <GatsbyImage image={image} alt={data.mdx.frontmatter.hero_image_alt} />
+      <h1 style={{ margin: "0.2em" }}>{data.mdx.frontmatter.title}</h1>
+      <p style={{ margin: 0, padding: "0 8px", opacity: 0.5 }}>
+        {data.mdx.frontmatter.date}
+      </p>
       {children}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          maxWidth: 360,
+          margin: "44px 0 0 0",
+        }}
+      >
+        <GatsbyImage
+          image={image}
+          alt={data.mdx.frontmatter.hero_image_alt}
+          imgStyle={{ maxWidth: 360, height: "auto" }}
+        />
+      </div>
     </Layout>
   );
 };
@@ -21,7 +37,7 @@ export const query = graphql`
     mdx(id: { eq: $id }) {
       frontmatter {
         title
-        date(formatString: "MMMM D, YYYY")
+        date(formatString: "YYYY.MM.DD")
         hero_image_alt
         hero_image_credit_link
         hero_image_credit_text

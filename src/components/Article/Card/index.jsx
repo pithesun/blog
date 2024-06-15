@@ -10,7 +10,7 @@ import { Link } from "gatsby";
 
 export const ArticleCard = ({ blog }) => {
   return (
-    <Link to={`/blog/${blog.frontmatter.slug}`}>
+    <Link to={`/post/${blog.frontmatter.slug}`}>
       <div className={articleCard} key={blog.id}>
         <div className={textWrapper}>{blog.frontmatter.title}</div>
 

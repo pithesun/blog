@@ -52,7 +52,7 @@ export const query = graphql`
         edges {
           node {
             frontmatter {
-              date(formatString: "MMMM D, YYYY")
+              date(formatString: "YYYY.MM.DD")
               title
               slug
             }
