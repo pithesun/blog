@@ -1,0 +1,39 @@
+---
+title: "사용을 피해야하는 Legacy 수명주기 API (번역)"
+date: "2024-07-25"
+slug: "page-life-cycle-apis-to-avoid"
+tags: ["web"]
+hero_image: "./esc.jpeg"
+hero_image_alt: "esc"
+hero_image_credit_link: ""
+hero_image_credit_text: ""
+---
+
+사용을 피해야하는 Legacy 수명주기 API
+
+**unload 이벤트**
+주의 : 모던 브라우저에서 절대 사용하지 말것❗❗
+
+많은 개발자들이 unload 이벤트를 보장된 콜백으로 간주하고 이를 상태를 저장하고 분석데이터를 보낼 수 있는 세션의 종료 신호로 사용하고 있습니다.
+그러나 그렇게 하는 건 극도로 불안정합니다. 특히 모바일에서! unload 이벤트는 모바일에서 탭 전환화면에서 탭을 닫는다거나 앱 전환화면에서 브라우저 앱을 닫는다거나 하는
+보통의 많은 unload 상황에서 발생하지 않습니다.
+
+이러한 이유로, 세선 종료 를 위해서는 visibilitychange 이벤트에 의존하는 것이 낫고, hidden 상태를 앱과 사용자 데이터를 저장할 수 있는 보장된 마지막 시간이라고 생각하는 것이 좋습니다.
+
+더 나아가 unload 이벤트 핸들러를 다는 것(onunload나 addEventListener를 통해서)은 브라우저가 빠른 뒤로가기 앞으로가기 로드를 위한 back/forward 캐시에 패이지를 두는 것을 막습니다.
+
+현대의 모든 브라우저에서는 unload 이벤트보다 페이지의 unload를 탐지가능한 pagehide 이벤트(a.k.a 종료상태)를 사용하는 것이 추천됩니다.
+만약 인터넥 익스플로어 버전 10이나 그 이하가 필요한 경우(-> 지원종료됐는데..),  pagehide 이벤트를 감지하는 기능을 구현해야 하며, 브라우저가 pagehide를 지원하지 않는 경우에만 unload를 사용해야 합니다.
+
+**beforeunload 이벤트**
+
+역사적으로 beforeunload는 페이지를 back/forward 캐시가 적용을 막기 때문에 beforeunload 이벤트는 unload 이벤트와 유사한 문제가 있습니다.
+현대의 브라우저들은 이런 제한을 가지고 있지 않습니다만, 예방적 차원에서 몇몇 브라우저들은 back/forward 캐시를 페이지에 적용할 때에,
+beforeunload 이벤트를 실행하지 않습니다. 이것은 beforeunload가 세션 종료의 시그널이라는 것을 보장하지 못한다는 것을 의미합니다. 
+또한 추가적으로, 몇몇 브라우저(크롬을 포함하여)들은 beforeunload 이벤트가 발생하기 위해서는 사용자의 인터렉션을 필요로 하며, 더나 아가 이것은 해당 이벤트에 대한
+신뢰성에 영향을 줄 수 있습니다.
+
+beforeunload와 unload의 차이점은 beforeunload에 대한 합법적으로 사용할 수 있는 케이스가 있다는 것이빈다.
+예를 들어 사용자가 페이지를 떠났을 때 저장하지 않은 변경사항을 잃을 수 있다는 점을 사용자에게 경고하고 싶을 때입니다.
+
+beforeunloa를 사용할 적합한 이유가 있기 때문에, 꼭 사용자가 저장하는 변경사항이 있는 경우에만 beforeunload 이벤트 리스너를 사용하는 것을 추천하며, 해당 리스너들은 변경사항이 저장된 즉시 지워야합니다.
