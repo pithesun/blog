@@ -2,7 +2,7 @@ import React from "react";
 
 import { CategoryLabel } from "../CategoryLabel";
 import { commonCategory } from "./style.module.css";
-const DEFAULT_LABEL = "전체";
+import { DEFAULT_LABEL } from "../../constants";
 
 export const Categories = ({ categories, selectedLabel, onSelect }) => {
   return (

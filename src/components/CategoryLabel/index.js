@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { label, textWrapper, activeState } from "./style.module.css";
+import { DEFAULT_LABEL } from "../../constants";
 
-const DEFAULT_LABEL = "전체";
 export const CategoryLabel = ({ categoryLabel, active, onSelect }) => {
   const onClickLabel = (e) => {
     if (active) {
-      onSelect("");
+      onSelect(DEFAULT_LABEL);
       return;
     } else {
       onSelect(categoryLabel);
@@ -13,6 +13,7 @@ export const CategoryLabel = ({ categoryLabel, active, onSelect }) => {
   };
   return (
     <button
+      type="button"
       className={`${label} ${active ? activeState : DEFAULT_LABEL}`}
       onClick={onClickLabel}
     >

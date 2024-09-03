@@ -3,11 +3,9 @@ import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
 import Seo from "../components/Seo";
 import { ArticleSet } from "../components/Article/Set";
-import { CategoryLabel } from "../components/CategoryLabel";
 import { Categories } from "../components/Categories";
 import { useState } from "react";
-
-const DEFAULT_LABEL = "전체";
+import { DEFAULT_LABEL } from "../constants";
 
 const BlogPage = ({ data }) => {
   const [selectedLabel, setSelectedLabel] = useState(DEFAULT_LABEL);
