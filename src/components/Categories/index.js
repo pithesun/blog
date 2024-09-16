@@ -3,8 +3,13 @@ import React from "react";
 import { CategoryLabel } from "../CategoryLabel";
 import { commonCategory } from "./style.module.css";
 import { DEFAULT_LABEL } from "../../constants";
+import { filterCategories } from "../../utils";
 
 export const Categories = ({ categories, selectedLabel, onSelect }) => {
+  const refinedCategories = React.useMemo(() => {
+    return filterCategories(categories);
+  }, [categories]);
+
   return (
     <div className={commonCategory}>
       {
@@ -14,12 +19,12 @@ export const Categories = ({ categories, selectedLabel, onSelect }) => {
           active={selectedLabel === DEFAULT_LABEL}
         />
       }
-      {categories.map((category) => {
+      {refinedCategories.map((category) => {
         return (
           <CategoryLabel
-            categoryLabel={category.fieldValue}
+            categoryLabel={category}
             onSelect={onSelect}
-            active={selectedLabel === category.fieldValue}
+            active={selectedLabel === category}
           />
         );
       })}

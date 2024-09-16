@@ -23,7 +23,10 @@ const BlogPage = ({ data }) => {
             ? data.allMdx.nodes
             : data.allMdx.group
                 ?.filter((field) => {
-                  return field.fieldValue === selectedLabel;
+                  return (
+                    String(field.fieldValue).toLowerCase() ===
+                    String(selectedLabel).toLowerCase()
+                  );
                 })?.[0]
                 .edges?.flatMap((edge) => edge.node)
         }
