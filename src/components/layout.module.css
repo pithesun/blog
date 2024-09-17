@@ -21,6 +21,7 @@
   display: flex;
   font-family: sans-serif;
   flex-direction: column;
+  padding-bottom: 56px;
 }
 
 .heading {
