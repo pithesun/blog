@@ -1,0 +1,34 @@
+---
+title: "stale time과 cache time"
+date: "2024-09-05"
+slug: "stale-cache-time"
+tags: ["react", "react-query"]
+hero_image: "./hamburger.jpeg"
+hero_image_alt: "hamburger"
+hero_image_credit_link: ""
+hero_image_credit_text: ""
+---
+
+react-query를 쓸 때 staleTime과 cacheTime은 아주 중요하다. (+ 키값도)
+클라이언트 브라우저에서 실제 바뀐 값이 업데이트가 되지 않으면 아주 곤란하기 때문이다.
+
+stale-time은 말 그대로 데이터가 얼마간 '신선한가'를 결정한다.
+stale time이 지나면 react-query에서 네트워크 요청을 하게 된다.
+하지만, 그렇게 받아오는 데이터가 실제로 화면에 보여지는 UI에 업데이트 될지는 cache time이 결정한다.
+
+즉 실제로 cache-time이 지나야지 '렌더링 되는 화면'이 업데이트 된다.
+
+따라서 useQuery의 반환값인 isFetched(isFetching,isFetchedAfterMount)는 stale-time에 영향을 받으며,
+isLoading은 cachetime에 영향을 받는다.
+
+그리고 staleTime은 cacheTime이 지난 경우 미리 보여준 신선한 데이터를 바로 렌더링 시켜줄 수 있는 데에 의의가 있으므로,
+staleTime을 cacheTIme보단 짧게 설정하는 것이 효율적이다.
+
+useQuery의 staletime을 잘 조정한다면, 손쉽게 네트워크 호출건수를 줄일 수 있어서 좋다.
+
+나 같은 경우에는 이번에 캐러셀 컴포넌트 내부의 아이템이 하나하나 api 호출이 필요한 경우에 적용하였다.
+캐러셀 컴포넌트의 경우 사용자가 좌우로 이동하는 경우가 많은데 이때마다 모두 컴포넌트에서 api를 호출해서 뿌려주는 것이
+낭비이기 때문이다.
+
+또한 좌우 합쳐서 5개의 슬라이드까지는 lazyloading에서 progressive하게 가져올 수 있게 하여,
+미리 컴포넌트의 api를 호출하게 하여 좀 더 사용성까지 챙겼다.
