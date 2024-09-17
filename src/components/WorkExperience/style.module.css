@@ -1,0 +1,14 @@
+.row {
+  display: "flex";
+}
+
+/* flexBasis: "16rem", flexShrink: 0, paddingRight: "12px" */
+.row-left {
+  flex-basis: 16rem;
+  flex-shrink: 0;
+  padding-right: 12px;
+}
+
+.row-right {
+  flex-grow: 1;
+}
