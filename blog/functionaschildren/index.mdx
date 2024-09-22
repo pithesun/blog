@@ -1,5 +1,5 @@
 ---
-title: "Child 컴포넌트에게 props 전달하는 법"
+title: "Child 컴포넌트에게 props 전달하는 법과 HOC(2024.09.22 업데이트)"
 date: "2024-06-24"
 slug: "function-as-child-component"
 tags: ["React"]
@@ -31,12 +31,99 @@ Context를 쓰거나 React.cloneElement()를 쓰거나 하는 답변이 있었�
 
 HOC는 횡단 관심사를 묶어서 컴포넌트의 공통된 처리를 위함이었다. 그러나 이러한 공통 처리는 굳이 컴포넌트 자체를 래핑할 필요없이 <strong>hooks</strong>를 통해 처리할 수 있게 되었다.
 
-또한 HOC는 컴포넌트들을 조합 및 합성하여 새로운 컴포넌트를 만들어낼 수 있다는 장점이 있었다. 그러나 이러한 장점은 글을 읽어보니 <strong>function as child 패턴</strong>으로 대체할 수 있었다. 그렇게 hoc 패턴은
-점차 잊혀진 패턴이 되어가고 있는듯하다. 이제 막 대학교 4학년 때, 처음 react를
+또한 HOC는 컴포넌트들을 조합 및 합성하여 새로운 컴포넌트를 만들어낼 수 있다는 장점이 있었다.
+그러나 이러한 장점은 글을 읽어보니 <strong>function as child 패턴</strong>으로 대체할 수 있다는 생각이 들었다.
+
+예를 들면 이런 식이다.(2024.09.22 업데이트 내용)
+
+아래 소스는 인프런의 '[리액트 2부] 고급 주제와 훅' 강의를 듣다가 참고한 코드인데 HOC 패턴을 사용하여 로깅을 하는 예시이다.
+
+```javascript
+const withLogging = (WrappedComponent) => {
+  function log(message) {
+    console.log(`${getComponentName(WrappedComponent)} ${message}`);
+  }
+  class WithLogging extends React.Component {
+    render() {
+      const enhancedProps = {
+        log,
+      };
+      return <WrappedComponent {...this.props} {...enhancedProps} />;
+    }
+    componentDidMount() {
+      log();
+    }
+  }
+
+  return WithLogging;
+};
+
+class Header extends React.Component {
+  render() {
+    return <header>헤더</header>;
+  }
+}
+class Button extends React.Component {
+  handleClick = () => {
+    this.props.log("[버튼] 클릭");
+  };
+  render() {
+    return <button onClick={this.handleClick}>버튼</button>;
+  }
+}
+
+const EnhancedHeader = withLogging(Header);
+const EnhancedButton = withLogging(Button);
+```
+
+그런데 충분히 이런 소스도 렌더 프롭을 이용하여 구현할 수 있다는 생각이 들어 작업해보았다.
+
+```javascript
+const Logging = ({ children }) => {
+  function log() {
+    const wrappedComponent =
+      typeof children === "function" ? children() : children;
+    console.log(getComponentName(wrappedComponent.type()));
+  }
+
+  React.useEffect(() => {
+    log();
+  }, []);
+
+  return typeof children === "function" ? children({ log }) : children;
+};
+
+const Header = () => {
+  return <header>헤더</header>;
+};
+const Button = (props) => {
+  return (
+    <button
+      onClick={() => {
+        props.log();
+      }}
+    >
+      버튼
+    </button>
+  );
+};
+
+const EnhancedHeader = () => (
+  <Logging>
+    <Header />
+  </Logging>
+);
+
+const EnhancedButton = () => {
+  return <Logging>{(props) => <Button {...props} />}</Logging>;
+};
+```
+
+이제 막 대학교 4학년 때, 처음 react를
 배울 때 해당 패턴이 잘 이해가 안 갔던 기억이 나는데 그이후 3~4년이 지나니 변화가
 있는 게 정말 신기하다.
 
-지금의 패턴이나, 코드의 방식도 언제든지 변경되고 레거시가 될 수 있다는 것을 꼭 유념해야겠다.(이미 레거시이긴 한데..)
+지금의 패턴이나, 코드의 방식도 언제든지 변경되고 레거시가 될 수 있다는 것을 꼭 유념해야겠다.
 
 아래는 미디엄 글에서 본 Function as Child 패턴의 장점을 내가 이해되게 적어둔 발번역이다.
 
