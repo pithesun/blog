@@ -1,8 +1,6 @@
 .row {
   display: flex;
 }
-
-/* flexBasis: "16rem", flexShrink: 0, paddingRight: "12px" */
 .row-left {
   flex-basis: 16rem;
   flex-shrink: 0;
