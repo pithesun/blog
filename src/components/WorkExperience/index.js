@@ -6,7 +6,7 @@ export const WorkExperience = () => {
   return (
     <>
       <h2>Work Experience</h2>
-      <div className={row}>
+      <div>
         <div className={rowLeft}>
           <h3>현대퓨처넷(현대아이티앤이).</h3>
           <span>2022.1.3~</span>
@@ -23,7 +23,7 @@ export const WorkExperience = () => {
               "홈쇼핑 방송상품 상세페이지 내 비디오 자동재생 개발 및 여러 비디오 사용자 인터랙션에 대한 방어처리",
               "비즈니스 요구사항에 빠른 대응을 위해 필요값 상수화 및 어드민 제어 가능하도록 개발",
             ]}
-            teckstack={"javascript, React, java, Spring Boot"}
+            teckstack={"javascript, React, Next.js, Java, Spring Boot"}
           />
           <WorkExperienceRow
             title={"Hmall 차세대 프로젝트 (2023.06~2024.01)"}
@@ -37,7 +37,7 @@ export const WorkExperience = () => {
               않는 이슈/ Exception handling 오류로 인해 특정 API uuid 토큰
               발행하지 못하는 이슈/ feign client 도입`,
             ]}
-            teckstack={"javascript, React, java, Spring Boot"}
+            teckstack={"javascript, React, Next.js, Java, Spring Boot"}
           />
           <WorkExperienceRow
             title={"AI상품평 분석 솔루션 도입 프로젝트(2023.01~2023.03)"}
@@ -49,7 +49,7 @@ export const WorkExperience = () => {
               상품평 포맷에 맞게끔 데이터 가공처리`,
               "상품평 탭 진입 시 상품평 키워드 노출 및 키워드별 상품평 리스트를 전시",
             ]}
-            teckstack={"javascript, java, Spring Framework"}
+            teckstack={"javascript, jsp, Java, Spring Framework"}
           />
           {/* <ul>
             <li>재입고 알림</li>
