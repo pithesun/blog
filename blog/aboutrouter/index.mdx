@@ -1,0 +1,47 @@
+---
+title: "클라이언트 사이드 라우팅"
+date: "2024-09-30"
+slug: "cliend-side-routing"
+tags: ["React", "Next"]
+hero_image: "./cloud.jpeg"
+hero_image_alt: "cloud"
+hero_image_credit_link: ""
+hero_image_credit_text: ""
+---
+
+기본적으로 브라우저에서 링크 이동을 하려면 a tag의 href을 이용하여 이동할 수 있다.
+그러나 SPA 어플리케이션의 경우 앱 내부에서 이동을 하려면 a href의 기본 기능을 사용할 수 없다.
+
+따라서 history 관련 웹 api 중 pushstate와 popstate를 사용할 수 있다.
+pushstate는 브라우저 스택은 저장하지만 서버 요청하여 브라우저에 이동하는 역할은 하지 않기 때문에,
+앱 내부 페이지 이동 시에는 pushstate를 그리고 뒤로가기 시에는 popstate를 통해서 적절한 페이지를 노출할 수 있다.
+
+url을 state로 보고, 변경 시마다 다른 컴포넌트를 그려주는 식이다.
+
+실제 구현의 경우 아래 두개의 링크가 꽤나 도움이 되었다.
+
+[[리액트 2부] 2.2 라우터 1](https://jeonghwan-kim.github.io/2023/06/24/lecture-react-season2-part2-ch2)
+[[리액트 2부] 2.3 라우터 2](https://jeonghwan-kim.github.io/2023/06/24/lecture-react-season2-part2-ch3)
+(이 강의는 정말 강추다!)
+
+그러나 next.js와 같이 ssr을 지원하는 프레임워크에서는 이 라우팅에 대해 좀 더 고민해볼 필요가 있다.
+useRouter와 같이 클라이언트 라우팅을 지원한다고 하더라도, 해당 페이지가 getServerSideProps로 렌더링한다거나 하면,
+불가피하게 뒤로가기 시에 서버 요청이 한 번 더 들어갈 수 밖에 없기 때문이다.
+
+이 경우 bf cache를 고려해볼 수 있겠다.
+[https://web.dev/articles/bfcache](https://web.dev/articles/bfcache)
+
+bf cache는 브라우저에서 해주는 것이기 때문에 강제로 적용하게 하는 건 아니지만 bf-cache가 타게끔 만드는 조건을 지켜줄 수 있다.
+
+우선 첫번째로 크롬 개발자 도구 > Application > Background Services에 back/forward cache에서
+해당 페이지에 적용될 수 있는지 테스트해볼 수 있고, 안 된다면 왜 안 되는지 그 이유에 대해서도 나온다.
+bf-cache가 안 먹는 이유 중에 가장 대표적인 것이 unload 이벤트 핸들러과 cache-control을 no-store로 설정하는 것이다.
+
+---사족---
+
+지금 내가 담당하는 페이지가 bf-cache가 안 먹는다..ㅡ,,ㅡㅜ
+
+하지만 다른 페이지에서 bf-cache가 먹으면서 몇몇 기능이 안 되는 케이스를 봐서, 그런 것까지 고려해서 bf-cache를 적용해도
+문제없게끔 잘 만들어야겠다.
+
+그리고 가장 근본적인 원인일 것 같은 "getServerSideProps" 이게 적합한지에 대한 고민도 해봐야할 것 같다.
