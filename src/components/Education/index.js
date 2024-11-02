@@ -18,6 +18,19 @@ export const Education = () => {
       </div>
       <div className={row}>
         <div className={rowLeft}>
+          <h3>React18공식문서에 대한 비공식 한국어 번역스터디 참여</h3>
+        </div>
+        <div className={rowRight}>
+          <ul>
+            <li>
+              (2023.3~2023.5)
+              https://react-ko.dev/learn/extracting-state-logic-into-a-reducer
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className={row}>
+        <div className={rowLeft}>
           <h3>현대아이티앤이 채용확정형 </h3>
         </div>
         <div className={rowRight}>

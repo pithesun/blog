@@ -4,19 +4,30 @@ export const WorkExperienceRow = ({
   title,
   description,
   didlist,
+  issueList,
   teckstack,
 }) => {
   return (
     <ul>
       <h3>{title}</h3>
-      <p>요약: {description}</p>
+      <p>{description}</p>
       <p>테크스택 : {teckstack}</p>
-      <div>
-        what I did :{" "}
-        {didlist?.map((did) => (
-          <li>{did}</li>
-        ))}
-      </div>
+      <p>
+        Issue Point :{" "}
+        <ul>
+          {issueList?.map((issue) => (
+            <li>{issue}</li>
+          ))}
+        </ul>
+      </p>
+      <p>
+        What I did :{" "}
+        <ul>
+          {didlist?.map((did) => (
+            <li>{did}</li>
+          ))}
+        </ul>
+      </p>
     </ul>
   );
 };
