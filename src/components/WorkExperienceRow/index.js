@@ -5,6 +5,7 @@ export const WorkExperienceRow = ({
   description,
   didlist,
   issueList,
+  toDoList,
   teckstack,
 }) => {
   return (
@@ -28,6 +29,16 @@ export const WorkExperienceRow = ({
           ))}
         </ul>
       </p>
+      {toDoList && (
+        <p>
+          To do list :
+          <ul>
+            {toDoList?.map((todo) => (
+              <li>{todo}</li>
+            ))}
+          </ul>
+        </p>
+      )}
     </ul>
   );
 };
