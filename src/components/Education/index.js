@@ -18,7 +18,7 @@ export const Education = () => {
       </div>
       <div className={row}>
         <div className={rowLeft}>
-          <h3>React18공식문서에 대한 비공식 한국어 번역스터디 참여</h3>
+          <h3>React18 공식 문서에 대한 한국어 번역 스터디 참여</h3>
         </div>
         <div className={rowRight}>
           <ul>
@@ -31,12 +31,12 @@ export const Education = () => {
       </div>
       <div className={row}>
         <div className={rowLeft}>
-          <h3>현대아이티앤이 채용확정형 </h3>
+          <h3>현대아이티앤이 채용 확정형 교육</h3>
         </div>
         <div className={rowRight}>
           <ul>
             <li>
-              웹 개발 전반(vue, spring framework, oracle/java) (2021.7~2021.12)
+              웹 개발 전반(Vue, Spring Framework, Oracle/Java) (2021.7~2021.12)
             </li>
           </ul>
         </div>
