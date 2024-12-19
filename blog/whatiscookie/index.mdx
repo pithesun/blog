@@ -1,0 +1,33 @@
+---
+title: "쿠키에 대해 헷갈렸던 점을 다시 짚어보자."
+date: "2024-12-20"
+slug: "cookie-cookie"
+tags: ["web"]
+hero_image: "./hamburger.jpeg"
+hero_image_alt: "hamburger"
+hero_image_credit_link: ""
+hero_image_credit_text: ""
+---
+
+바보같지만 늘 헷갈렸던 부분을 짚어본다.
+
+1. 쿠키는 서버단인가? 프론트인가?
+
+쿠키는 브라우저에 저장된다. 하지만 서버가 브라우저에 상태를 저장하기 위해 사용할 수 있다.
+HTTP Cookie 헤더 또는 Set-Cookie 헤더를 통해 stateless한 HTTP 서버가 user agent에
+상태를 저장하기 위해 쿠키를 사용하는 것이다.
+
+2. localStorage/sessionStorage과는 무슨 차이인가?
+
+localStorage나 sessionStorage와 같이 브라우저에 저장되나
+차이점은 서버가 쿠키를 설정할 수 있고,
+또 쿠키가 서버로 직접 전송될 수 있다는 점이다.
+도메인과 path로 쿠키가 전송될 URL을 정할 수 있으며,
+스코프와 만료시간이 맞는다면 모든 요청 시에 쿠키가 따라붙기 때문에
+쿠키의 설정값을 적절히 정해주는 게 중요하다.
+
+참고:
+
+https://developer.mozilla.org/ko/docs/Web/HTTP/Cookies
+
+https://datatracker.ietf.org/doc/html/rfc6265
