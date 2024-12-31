@@ -1,0 +1,22 @@
+---
+title: "[원티드 백엔드 챌린지] AWS 사전미션"
+date: "2024-12-31"
+slug: "aws-pre-challenge"
+tags: ["web"]
+hero_image: "./ocean.png"
+hero_image_alt: "ocean"
+hero_image_credit_link: ""
+hero_image_credit_text: ""
+---
+
+https://www.youtube.com/watch?v=HI0fPiZpniY&t=11s
+
+https://www.youtube.com/watch?v=fhNpjPr-f54
+
+두 개의 영상을 시청한 후 각각의 영상에서 사용자 구간별로 다른 전략을 취하는 내용을 3개 이상 찾아 각각 2~3개의 문장으로 요약해주세요.
+
+1. 모니터링 로그는 2017년 영상은 키바나를 비릇한 써드파티 솔루션 사용을 권장. 2022년 영상은 클라우드 워치를 권장.
+2. 1000명 이상일 때, 2017년 영상은 db 이중화를 위해 rds 기본-예비 복제본, 다중가용영역 활용 구성을 권장. 2022년 영상에서는 aws 관리형 데이터 베이스, 특히 Amazon Aurora 권장.
+3. 만명 이상일 때, 2017년 영상은 s3, cloudfront, Dynomodb, elasticcache, 오토스케일링을 권장하였지만 2022년 영상에서는 오토스케일링, cloudfront, systems manager, aws was, aws shield, Aws guard duty을 권장.
+4. 10만명 이상 100만명 이하 규모에서 2017년 영상은 자동화 어플리케이션 관리 솔루션으로 편의성을 순서대로 aws elastic beanstalk, aws opsworks, aws cloudformation, aws ec2에 직접 설치 등을 권장. 또한 느슨한 결합을 위해 aws SQS, lambda 서비스를 권장. 그러나 2022년 영상에서는 컨테이너 기반 서비스로 전환하기를 권장하며 관련 솔루션인 ecs, eks 등과 elastic cache 사용을 권장.
+5. 500만명~1000만명 규모에서 2017년 영상은 페더레이션, 샤딩 전략 권장. 2022년 영상은 샤딩 뿐만 아니라, 목적에 맞는 데이베이스 분리, 멀티리전 서비스(글로벌 데이터베이스, dynamo 글로벌 테이블, elastic cache 글로벌 데이터 스토어 등)와 cfn, cdk를 통한 iac 구현을 권장.
