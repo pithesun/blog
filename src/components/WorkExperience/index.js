@@ -8,10 +8,27 @@ export const WorkExperience = () => {
       <h2>Work Experience</h2>
       <div>
         <div className={rowLeft}>
-          <h3>현대퓨처넷(현대아이티앤이).</h3>
+          <h3>현대퓨처넷(구 현대아이티앤이).</h3>
           <span>2022.1.3~</span>
         </div>
         <div className={rowRight}>
+          <WorkExperienceRow
+            title={"상품상세 스켈레톤 UI 및 진입 속도 개선(2025.1~2025.3)"}
+            description={
+              "스켈레톤 UI 개선과 API 최적화를 통한 진입 속도 및 CLS 지표 개선"
+            }
+            issueList={[
+              "스켈레톤 UI 구매영역까지의 확대 요구사항으로 인한 속도 지연 이슈에 대한 우려",
+              "스켈레톤 UI를 최적화하여도 뒤따르는 실제 UI의 렌더링 속도가 따라오지 못하는 경우, FID 지표 하락 우려",
+            ]}
+            didlist={[
+              "스켈레톤 API 최적화와 레디스 캐싱 적용을 통해 추가 조회로 인한 API 속도 지연 이슈 해결",
+              "렌더링 트리 분석을 통한 불필요 dynamic import 코드 삭제 및 useDefferedValue 훅을 사용한 깜빡임 현상 제거를 통해 상품상세 페이지 CLS 성능 지표 개선 평균 40% 개선 및 깜빡임 현상 제거",
+            ]}
+            teckstack={"typescript, React, Next.js, Java, Spring Boot"}
+          />
+          <br />
+          <br />
           <WorkExperienceRow
             title={"Hmall 상품평 탭 리뉴얼(2024.10)"}
             description={
@@ -31,24 +48,24 @@ export const WorkExperience = () => {
             ]}
             teckstack={"javascript, React, Next.js, Java, Spring Boot"}
           />
+          <br />
+          <br />
+
           <WorkExperienceRow
             title={
-              "라이브 방송 중인 상품 상세 페이지 진입 시 영상 자동 재생(2024.6)"
+              "라이브 방송 중인 상품 상세 페이지 진입 시 영상 자동 재생(2024.6 및 2025.3 최적화)"
             }
             description={
-              "라이브 방송 중인 상품 상세 페이지 진입 시 영상을 자동 재생하는 프론트 개발을 진행"
+              "라이브 방송 중인 상품 상세 페이지 진입 시 영상 자동 재생 및 상단 영역 미니 플레이어 고정 재생"
             }
             issueList={[
               "영상 재생 여부(영상 중지, 페이지 이탈 등)에 맞춰서 실시간 시청자 수 집계 API 요청을 중복/누락 없이 호출 필요",
-              "웹뷰 환경에서 웹과 앱 모두에서 비디오 제어 필요",
+              "웹뷰 환경에서 웹과 앱 모두에서 비디오 제어 필요(미디어 세션 제어/ 타 앱 및 탭 이동 등)",
+              "스크롤하여 하단 이동하는 경우 고정 비디오 영역 생성",
             ]}
             didlist={[
               "사용자의 임의 영상 재생/중지뿐만 아니라, 상세 페이지 이탈, 타 앱/탭 진입, 미디어 세션을 통한 비디오 재생/중지 케이스를 고려하여, beforeunload / visibility change / mediaSession과 같은 여러 웹 API를 활용하여 개발.",
               "stale closer issue로 인해 의도치 않은 API 호출 중복/누락 문제를 해결하기 위해 영상 재생 여부의 state를 react 업데이터 함수를 사용하여 setState하도록 함.",
-              "비디오 재생 시, 브라우저 alert 창이 띄워질 때 비디오가 멈추는 현상이 나타나 브라우저 alert 창을 커스텀 모달창으로 바꾸는 개선 진행",
-            ]}
-            toDoList={[
-              "bf캐시 적용을 위해서는 beforeunload 대신 chrome에서 권장하는 pagehide api로 변경 예정",
             ]}
             teckstack={"javascript, React, Next.js, Java, Spring Boot"}
           />
