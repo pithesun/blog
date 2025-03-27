@@ -27,8 +27,6 @@ export const WorkExperience = () => {
             ]}
             teckstack={"typescript, React, Next.js, Java, Spring Boot"}
           />
-          <br />
-          <br />
           <WorkExperienceRow
             title={"Hmall 상품평 탭 리뉴얼(2024.10)"}
             description={
@@ -48,9 +46,6 @@ export const WorkExperience = () => {
             ]}
             teckstack={"javascript, React, Next.js, Java, Spring Boot"}
           />
-          <br />
-          <br />
-
           <WorkExperienceRow
             title={
               "라이브 방송 중인 상품 상세 페이지 진입 시 영상 자동 재생(2024.6 및 2025.3 최적화)"
