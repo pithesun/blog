@@ -18,6 +18,7 @@ const AboutPage = () => {
         주로 프론트엔드 개발 기술에 관심이 많습니다.
       </p>
       <Contact />
+      <br />
       <WorkExperience />
       <Education />
     </Layout>

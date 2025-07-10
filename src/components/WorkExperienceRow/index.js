@@ -14,7 +14,7 @@ export const WorkExperienceRow = ({
       <p>{description}</p>
       <p>테크스택 : {teckstack}</p>
       <p>
-        Issue Point :{" "}
+        🔨 이슈와 실행내용 :{" "}
         <ul>
           {issueList?.map((issue) => (
             <li>{issue}</li>
@@ -22,7 +22,7 @@ export const WorkExperienceRow = ({
         </ul>
       </p>
       <p>
-        What I did :{" "}
+        📈 실행결과와 인사이트 :{" "}
         <ul>
           {didlist?.map((did) => (
             <li>{did}</li>
