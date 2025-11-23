@@ -29,7 +29,6 @@ export const WorkExperience = () => {
             ]}
             teckstack={"Playwright, TypeScript, Docker, tekton, argoCD"}
           />
-          <br />
           <WorkExperienceRow
             title={
               "[2025.05] 상품상세 설명서 이미지 CDN 예상 트래픽 보고서 알리미 신설"
@@ -82,7 +81,6 @@ export const WorkExperience = () => {
             ]}
             teckstack={"javascript, React, Next.js"}
           />
-          <br />
           <WorkExperienceRow
             title={"[2023.06~2024.01] Hmall 차세대 프로젝트"}
             description={`Hmall의 기술 스택 및 설계를 변경하는 차세대 프로젝트(jsp/Spring Framework -> React/nextjs, Spring Boot) 지원`}
