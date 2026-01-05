@@ -1,0 +1,178 @@
+---
+title: "URL 인코딩과 디코딩"
+date: "2026-01-06"
+slug: "url-encoding-decoding"
+tags: ["web"]
+hero_image: "./flatwhite.jpg"
+hero_image_alt: "flatwhite"
+hero_image_credit_link: ""
+hero_image_credit_text: ""
+---
+
+## 이슈 내용 및 원인
+
+- `URLSearchParams`의 toString()으로 인코딩된 쿼리값이 포함된 url을 `encodeURI` 로 감싸면서 중복 인코딩 발생
+
+## 해결방향과 방법 찾기
+
+- 중복 인코딩을 해결해야하는데 이를 어떻게 해결할 것인지가 주안점이었음.
+- `encodeURI` 를 단순히 빼버리기에는 심리적으로 불안하여, 어떻게 하면 안전하게 인코딩시킬 수 있을까를 고민하게 되었음.
+
+내가 내린 결론은
+
+- `new URL()` 는 내부적으로 `URLSearchParams` 을 사용하도록 설계되어있기 때문에 `encodeURI` 를 사용하지 않고 `URLSearchParams` 를 사용하여 중복인코딩을 해결할 수 있으며
+- `URL()` 과 `URLSearchParams` 를 함께 쓰는 것이 나름 best practice라는 결론을 도출함.
+
+## 근거
+
+## 1. URL()과 URLSearchParams의 내부 로직
+
+### new URL()
+
+**작동원리**:
+
+1. 브라우저가 new URL()을 실행할 때, 내부적으로 새로운 **URLSearchParams** 객체를 만들어서 URL 객체의 **query object**라는 슬롯에 저장합니다.
+2. 새로 만든 URLSearchParams 객체에 아까 파싱한 쿼리 스트링(query)을 집어넣어 초기화합니다. 이때 인코딩된 문자열이 디코딩되어 저장됩니다.
+3. 이 query object가 방금 만든 URL 객체에 속해 있다는 연결고리를 만듭니다.
+
+### URLSearchParams
+
+**작동 원리:**
+
+1. **Parsing:** 입력된 URL의 쿼리 부분을 파싱할 때 `percent-decode` 과정을 거칩니다.
+2. **Serialization:** `toString()` 등을 통해 URL을 다시 문자열로 만들 때, [serializer](https://www.google.com/search?q=https://url.spec.whatwg.org/%23concept-url-serializer)가 동작하며 다시 `percent-encode`를 수행합니다.
+
+**세부내용:**
+
+1. `init`이 **Sequence**(배열과 같은 순서가 있는 구조)인 경우
+
+예: `new URLSearchParams([["name", "gemini"], ["age", "1"]])`
+
+- **동작:** 배열 안의 각 요소(innerSequence)를 하나씩 확인합니다.
+- **조건:** 각 요소는 반드시 **두 개(키와 값)**로 이루어져야 합니다. 만약 `["a", "b", "c"]`처럼 3개가 들어있으면 `TypeError`를 던집니다.
+- **결과:** `(키, 값)` 쌍을 그대로 내부 리스트에 추가합니다.
+
+2. `init`이 **Record**(일반적인 객체)인 경우
+
+예: `new URLSearchParams({ "name": "gemini", "age": "1" })`
+
+- **동작:** 객체의 각 `key(name)`와 `value`를 순회합니다.
+- **결과:** 각 쌍을 꺼내서 내부 리스트에 추가합니다.
+
+3. `init`이 **String**(문자열)인 경우
+
+예: `new URLSearchParams("name=%EC%95%88%EB%85%95&age=1")`
+
+- **Assert (확인):** 앞의 두 경우가 아니라면 무조건 문자열로 간주합니다.
+- **Parsing (파싱):** `init` 문자열을 **parsing**한 결과물로 내부 리스트를 설정합니다.
+
+> 여기서 "parsing"이란?
+> 표준 문서의 다른 섹션인 application/x-www-form-urlencoded 파싱 알고리즘을 따릅니다. 이 알고리즘은 문자열을 &와 =로 쪼갠 뒤, 퍼센트 인코딩된 문자(%EC%95%88%EB%85%95 등)를 실제 문자(안녕)로 디코딩하여 저장하라고 명시하고 있습니다.
+
+URLSearchParams은  [`application/x-www-form-urlencode`](https://url.spec.whatwg.org/#application-x-www-form-urlencoded-percent-encode-set) 로 퍼센트 인코딩을 진행한다. 퍼센트 인코딩이란 (\*, -, ., - +)를 제외한 모든 코드포인트를 인코딩한다**. 또한 전체 직렬화/비직렬화할 때만 인코딩/디코딩을 하기 때문에**, 개별 키와 값에 접근할 때에는 “**unencoded**” 버전으로 다루게 된다.
+
+<aside>
+💡
+
+**urlsearchparams** 꿀팁!! → 캐싱키를 만들 때 **urlsearchparams** 의 sort() 메서드를 사용하면 유용하다. (→ 리액트쿼리 캐싱키 만들 때도 유용할듯!)
+
+It can be useful to sort the name-value tuples in a [`URLSearchParams`](https://url.spec.whatwg.org/#urlsearchparams) object, in particular to increase cache hits. This can be accomplished through invoking the [`sort()`](https://url.spec.whatwg.org/#dom-urlsearchparams-sort) method:
+
+```
+const url = new URL("https://example.org/?q=🏳️‍🌈&key=e1f7bc78");
+url.searchParams.sort();
+url.search; // "?key=e1f7bc78&q=%F0%9F%8F%B3%EF%B8%8F%E2%80%8D%F0%9F%8C%88"
+```
+
+To avoid altering the original input, e.g., for comparison purposes, construct a new [`URLSearchParams`](https://url.spec.whatwg.org/#urlsearchparams) object:
+
+```
+const sorted = new URLSearchParams(url.search)
+sorted.sort()
+```
+
+</aside>
+
+### 원문
+
+- URL 구현
+
+A URL object has an associated:
+
+**URL: a UR**L.
+**query object: a URLSearchParams object.**
+The API URL parser takes a scalar value string url and an optional null-or-scalar value string base (default null), and then runs these steps:
+
+Let parsedBase be null.
+
+If base is non-null:
+
+Set parsedBase to the result of running the basic URL parser on base.
+
+If parsedBase is failure, then return failure.
+
+Return the result of running the basic URL parser on url with parsedBase.
+
+To initialize a URL object url with a URL urlRecord:
+
+Let query be urlRecord’s query, if that is non-null; otherwise the empty string.
+
+Set url’s URL to urlRecord.
+
+**Set url’s query object to a new URLSearchParams object.**
+
+**Initialize url’s query object with query.**
+
+**Set url’s query object’s URL object to url.**
+
+```jsx
+6.1. URL class
+[Exposed=*,
+ LegacyWindowAlias=webkitURL]
+interface URL {
+  constructor(USVString url, optional USVString base);
+
+  static URL? parse(USVString url, optional USVString base);
+  static boolean canParse(USVString url, optional USVString base);
+
+  stringifier attribute USVString href;
+  readonly attribute USVString origin;
+           attribute USVString protocol;
+           attribute USVString username;
+           attribute USVString password;
+           attribute USVString host;
+           attribute USVString hostname;
+           attribute USVString port;
+           attribute USVString pathname;
+           attribute USVString search;
+  [SameObject] readonly attribute URLSearchParams searchParams;
+           attribute USVString hash;
+
+  USVString toJSON();
+};
+```
+
+[URL Standard](https://url.spec.whatwg.org/#concept-url)
+
+- URLSearchParams
+
+`URLSearchParams` objects [percent-encode](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding) anything in the [`application/x-www-form-urlencoded` percent-encode set](https://url.spec.whatwg.org/#application-x-www-form-urlencoded-percent-encode-set) (which contains all code points except ASCII alphanumeric, `*`, `-`, `.`, and `_`), and encode U+0020 SPACE as `+`. However, it only handles percent-encoding when serializing and deserializing full URL search params syntax. When interacting with individual keys and values**, you always use the unencoded version.**
+
+The `new URLSearchParams(init)` constructor steps are
+
+1. If init is a string and starts with U+003F (?), then remove the first code point from init.
+2. [Initialize](https://url.spec.whatwg.org/#urlsearchparams-initialize) [this](https://webidl.spec.whatwg.org/#this) with init.
+
+To initialize a [`URLSearchParams`](https://url.spec.whatwg.org/#urlsearchparams) object query with init:
+
+1. If init is a [sequence](https://webidl.spec.whatwg.org/#idl-sequence), then [for each](https://infra.spec.whatwg.org/#list-iterate) innerSequence of init:
+   1. If innerSequence’s [size](https://infra.spec.whatwg.org/#list-size) is not 2, then [throw](https://webidl.spec.whatwg.org/#dfn-throw) a [`TypeError`](https://webidl.spec.whatwg.org/#exceptiondef-typeerror).
+   2. [Append](https://infra.spec.whatwg.org/#list-append) (innerSequence[0], innerSequence[1]) to query’s [list](https://url.spec.whatwg.org/#concept-urlsearchparams-list).
+2. Otherwise, if init is a [record](https://webidl.spec.whatwg.org/#idl-record), then [for each](https://infra.spec.whatwg.org/#map-iterate) name → value of init, [append](https://infra.spec.whatwg.org/#list-append) (name, value) to query’s [list](https://url.spec.whatwg.org/#concept-urlsearchparams-list).
+3. Otherwise:
+   1. Assert: init is a string.
+   2. Set query’s [list](https://url.spec.whatwg.org/#concept-urlsearchparams-list) to the result of [parsing](https://url.spec.whatwg.org/#concept-urlencoded-string-parser) init.
+
+### 도움됐던 링크
+
+[https://www.reddit.com/r/webdev/comments/xh7770/urlsearchparams_behave_weirdly/?tl=ko](https://www.reddit.com/r/webdev/comments/xh7770/urlsearchparams_behave_weirdly/?tl=ko)

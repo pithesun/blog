@@ -18,6 +18,7 @@
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
     "gatsby": "^5.13.3",
+    "gatsby-plugin-feed": "^5.15.0",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-mdx": "^5.13.1",
     "gatsby-plugin-sharp": "^5.13.1",
