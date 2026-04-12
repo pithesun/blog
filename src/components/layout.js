@@ -11,8 +11,6 @@ import {
   a,
   mainContainer,
 } from "./layout.module.css";
-import CommonLogo from "./Common/Logo";
-
 const Layout = ({ pageTitle, children }) => {
   const data = useStaticQuery(graphql`
     query {
@@ -26,8 +24,10 @@ const Layout = ({ pageTitle, children }) => {
   return (
     <div>
       <header className={container}>
-        <Link to="/">
-          <CommonLogo />
+        <Link to="/" style={{ textDecoration: "none", color: "inherit", display: "flex", alignItems: "center" }}>
+          <span style={{ fontFamily: "'Noto Serif KR', serif", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>
+            {data.site.siteMetadata.title}
+          </span>
         </Link>
         <nav>
           <ul className={navLinks}>

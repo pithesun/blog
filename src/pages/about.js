@@ -7,7 +7,7 @@ import { Education } from "../components/Education";
 
 const AboutPage = () => {
   return (
-    <Layout pageTitle="My Blog Posts">
+    <Layout pageTitle="About Me">
       <h3>안녕하세요, 3년차 웹개발자 원주혜입니다</h3>
       <p style={{ lineHeight: "160%", overflowX: "hidden" }}>
         3년간 Hmall 웹서비스 운영팀에서 상품상세 영역을 담당하며, <br />

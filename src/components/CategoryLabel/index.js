@@ -17,7 +17,7 @@ export const CategoryLabel = ({ categoryLabel, active, onSelect }) => {
       className={`${label} ${active ? activeState : DEFAULT_LABEL}`}
       onClick={onClickLabel}
     >
-      <div className={textWrapper}>{`#${categoryLabel}`}</div>
+      <div className={textWrapper}>{`${categoryLabel}`}</div>
     </button>
   );
 };

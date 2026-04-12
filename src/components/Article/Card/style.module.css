@@ -1,50 +1,36 @@
 @import "../../vars.css";
 
-.article-card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #f0f0f0;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: var(--secondary);
-  transition: box-shadow 0.2s ease;
-  height: 100%;
-}
-
 a {
   text-decoration: none;
   color: inherit;
   display: block;
-  height: 100%;
+}
+
+.article-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 8px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: var(--secondary);
+  transition: background-color 0.15s ease;
 }
 
 a:hover .article-card {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  background-color: #fafafa;
 }
 
-/* 썸네일 이미지 */
-.thumbnail {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  display: block;
-}
-
-/* 이미지 없을 때 플레이스홀더 */
-.thumbnail-placeholder {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  background-color: #f5f5f0;
-}
-
-/* 텍스트 영역 */
+/* 왼쪽 텍스트 영역 */
 .body {
-  padding: 14px 16px 18px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
-/* 태그 + 날짜 한 줄 */
+/* 태그 + 날짜 */
 .meta {
   display: flex;
   align-items: center;
@@ -60,7 +46,6 @@ a:hover .article-card {
   background-color: #f6d38f40;
   border: 1px solid #f6d38f;
   color: #9a7c2e;
-  text-transform: lowercase;
   letter-spacing: 0.03em;
 }
 
@@ -70,12 +55,12 @@ a:hover .article-card {
   color: #aaa;
 }
 
-/* 카드 제목 */
+/* 제목 */
 .card-title {
   font-family: var(--font-serif);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--primary);
   margin: 0;
   word-break: keep-all;
@@ -85,7 +70,7 @@ a:hover .article-card {
   overflow: hidden;
 }
 
-/* 카드 요약 */
+/* 요약 */
 .card-excerpt {
   font-family: var(--font-sans);
   font-size: 13px;
@@ -97,4 +82,29 @@ a:hover .article-card {
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-break: keep-all;
+}
+
+/* 오른쪽 썸네일 */
+.thumbnail {
+  flex-shrink: 0;
+  width: 120px;
+  height: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.thumbnail-placeholder {
+  flex-shrink: 0;
+  width: 120px;
+  height: 80px;
+  border-radius: 6px;
+  background-color: #f0f0ec;
+}
+
+/* 모바일: 이미지 숨김 */
+@media (max-width: 480px) {
+  .thumbnail,
+  .thumbnail-placeholder {
+    display: none;
+  }
 }

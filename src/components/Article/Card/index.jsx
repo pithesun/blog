@@ -4,7 +4,6 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import {
   articleCard,
   thumbnail,
-  thumbnailPlaceholder,
   body,
   meta,
   tagBadge,
@@ -23,16 +22,6 @@ export const ArticleCard = ({ blog }) => {
   return (
     <Link to={`/post/${blog.frontmatter.slug}`}>
       <div className={articleCard}>
-        {image ? (
-          <GatsbyImage
-            image={image}
-            alt={blog.frontmatter.hero_image_alt ?? ""}
-            className={thumbnail}
-            objectFit="cover"
-          />
-        ) : (
-          <div className={thumbnailPlaceholder} />
-        )}
         <div className={body}>
           <div className={meta}>
             {firstTag && <span className={tagBadge}>{firstTag}</span>}
@@ -41,6 +30,14 @@ export const ArticleCard = ({ blog }) => {
           <h2 className={cardTitle}>{blog.frontmatter.title}</h2>
           <p className={cardExcerpt}>{blog.excerpt}</p>
         </div>
+        {image && (
+          <GatsbyImage
+            image={image}
+            alt={blog.frontmatter.hero_image_alt ?? ""}
+            className={thumbnail}
+            objectFit="cover"
+          />
+        )}
       </div>
     </Link>
   );

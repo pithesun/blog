@@ -3,7 +3,7 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `sunny's blog`,
+    title: `sunny pie's blog`,
     siteUrl: `https://pithesun.github.io/blog/`,
   },
   pathPrefix: "/blog",
