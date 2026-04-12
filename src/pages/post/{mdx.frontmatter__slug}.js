@@ -3,31 +3,32 @@ import Layout from "../../components/layout";
 import { graphql } from "gatsby";
 import Seo from "../../components/Seo";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import * as styles from "./post.module.css";
 
 const BlogPost = ({ data, children }) => {
-  const image = getImage(data.mdx.frontmatter.hero_image);
+  const image = data.mdx.frontmatter.hero_image
+    ? getImage(data.mdx.frontmatter.hero_image)
+    : null;
 
   return (
     <Layout pageTitle={data.mdx.frontmatter.title}>
-      <h1 style={{ margin: "0.2em" }}>{data.mdx.frontmatter.title}</h1>
-      <p style={{ margin: 0, padding: "0 8px", opacity: 0.5 }}>
-        {data.mdx.frontmatter.date}
-      </p>
-      {children}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          maxWidth: 360,
-          margin: "44px 0 0 0",
-        }}
-      >
-        <GatsbyImage
-          image={image}
-          alt={data.mdx.frontmatter.hero_image_alt}
-          imgStyle={{ maxWidth: 360, height: "auto" }}
-        />
-      </div>
+      <article className={styles.article}>
+        {image && (
+          <div className={styles.heroWrapper}>
+            <GatsbyImage
+              image={image}
+              alt={data.mdx.frontmatter.hero_image_alt}
+              className={styles.heroImage}
+              objectFit="cover"
+            />
+          </div>
+        )}
+        <header className={styles.header}>
+          <time className={styles.date}>{data.mdx.frontmatter.date}</time>
+          <h1 className={styles.title}>{data.mdx.frontmatter.title}</h1>
+        </header>
+        <div className={styles.content}>{children}</div>
+      </article>
     </Layout>
   );
 };

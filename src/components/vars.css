@@ -1,16 +1,19 @@
 :root {
   --primary: #222222;
   --secondary: #ffffff;
-  /* --label-large-font-family: 'Pretendard' */
+
+  --font-sans: "Noto Sans KR", sans-serif;
+  --font-serif: "Noto Serif KR", serif;
+
+  --label-large-font-family: var(--font-sans);
   --label-large-font-size: 21px;
   --label-large-font-style: normal;
-  --label-large-font-weight: 600;
-  /* --label-large-letter-spacing : */
-  --label-large-line-height: 140%;
+  --label-large-font-weight: 700;
+  --label-large-line-height: 1.5;
 
+  --paragraph-medium-font-family: var(--font-sans);
   --paragraph-medium-font-size: 16px;
   --paragraph-medium-font-style: normal;
   --paragraph-medium-font-weight: 400;
-  /* --paragraph-medium-letter-spacing */
-  --paragraph-medium-line-height: 140%;
+  --paragraph-medium-line-height: 1.75;
 }
