@@ -43,6 +43,13 @@ export const query = graphql`
           date(formatString: "YYYY.MM.DD")
           title
           slug
+          tags
+          hero_image {
+            childImageSharp {
+              gatsbyImageData(width: 400, aspectRatio: 1.5)
+            }
+          }
+          hero_image_alt
         }
         id
         excerpt
@@ -56,6 +63,13 @@ export const query = graphql`
               date(formatString: "YYYY.MM.DD")
               title
               slug
+              tags
+              hero_image {
+                childImageSharp {
+                  gatsbyImageData(width: 400, aspectRatio: 1.5)
+                }
+              }
+              hero_image_alt
             }
             id
             excerpt
