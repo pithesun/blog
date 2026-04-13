@@ -10,6 +10,8 @@ const BlogPost = ({ data, children }) => {
     ? getImage(data.mdx.frontmatter.hero_image)
     : null;
 
+  const tags = data.mdx.frontmatter.tags;
+
   return (
     <Layout pageTitle={data.mdx.frontmatter.title}>
       <article className={styles.article}>
@@ -25,6 +27,15 @@ const BlogPost = ({ data, children }) => {
         )}
         <header className={styles.header}>
           <time className={styles.date}>{data.mdx.frontmatter.date}</time>
+          {tags && tags.length > 0 && (
+            <div className={styles.tags}>
+              {tags.map((tag) => (
+                <span key={tag} className={styles.tagBadge}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
           <h1 className={styles.title}>{data.mdx.frontmatter.title}</h1>
         </header>
         <div className={styles.content}>{children}</div>
@@ -38,6 +49,7 @@ export const query = graphql`
     mdx(id: { eq: $id }) {
       frontmatter {
         title
+        tags
         date(formatString: "YYYY.MM.DD")
         hero_image_alt
         hero_image_credit_link

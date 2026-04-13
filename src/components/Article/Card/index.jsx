@@ -9,7 +9,6 @@ import {
   tagBadge,
   metaDate,
   cardTitle,
-  cardExcerpt,
 } from "./style.module.css";
 
 export const ArticleCard = ({ blog }) => {
@@ -17,18 +16,14 @@ export const ArticleCard = ({ blog }) => {
     ? getImage(blog.frontmatter.hero_image)
     : null;
 
-  const firstTag = blog.frontmatter.tags?.[0];
-
   return (
     <Link to={`/post/${blog.frontmatter.slug}`}>
       <div className={articleCard}>
         <div className={body}>
           <div className={meta}>
-            {firstTag && <span className={tagBadge}>{firstTag}</span>}
             <span className={metaDate}>{blog.frontmatter.date}</span>
           </div>
           <h2 className={cardTitle}>{blog.frontmatter.title}</h2>
-          <p className={cardExcerpt}>{blog.excerpt}</p>
         </div>
         {image && (
           <GatsbyImage
