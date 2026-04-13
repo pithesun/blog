@@ -1,0 +1,147 @@
+@import "../vars.css";
+
+/* ─── Wrapper ──────────────────────────────────────── */
+.wrapper {
+  margin-bottom: 48px;
+}
+
+/* ─── A–Z 색인 바 ───────────────────────────────────── */
+.alphaBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 28px;
+}
+
+.alphaBtn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alphaBtnDisabled {
+  color: #d4d4d4;
+  cursor: default;
+}
+
+.alphaBtnActive {
+  color: #555;
+}
+
+.alphaBtnActive:hover {
+  background: #f4f4f4;
+  color: #222;
+}
+
+.alphaBtnSelected {
+  background: #222;
+  color: #fff !important;
+}
+
+.alphaBtnSelected:hover {
+  background: #444;
+}
+
+/* ─── 그룹 목록 ─────────────────────────────────────── */
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.group {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* ─── 그룹 헤더 (알파벳 레이블) ────────────────────── */
+.groupHeader {
+  width: 24px;
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-top: 6px;
+}
+
+/* ─── 태그 목록 ─────────────────────────────────────── */
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ─── 태그 아이템 ────────────────────────────────────── */
+.tagItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px 4px 4px;
+  border: 1px solid #e8e8e8;
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  font-family: var(--font-sans);
+}
+
+.tagItem:hover {
+  border-color: #bbb;
+  background: #fafafa;
+}
+
+.tagItemActive {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+/* ─── 원형 뱃지 ─────────────────────────────────────── */
+.tagBadge {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #888;
+  text-transform: lowercase;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tagBadgeActive {
+  background: #3b82f6;
+  color: #fff;
+}
+
+/* ─── 태그 이름 ─────────────────────────────────────── */
+.tagName {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  letter-spacing: 0.01em;
+  transition: color 0.15s;
+}
+
+.tagItemActive .tagName {
+  color: #1d4ed8;
+}

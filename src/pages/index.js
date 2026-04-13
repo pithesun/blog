@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
 import Seo from "../components/Seo";
 import { ArticleSet } from "../components/Article/Set";
-import { Categories } from "../components/Categories";
+import { AlphaTagFilter } from "../components/AlphaTagFilter";
 import { useState } from "react";
 import { DEFAULT_LABEL } from "../constants";
 
@@ -12,9 +12,9 @@ const BlogPage = ({ data }) => {
 
   return (
     <Layout pageTitle="My Blog Posts">
-      <Categories
+      <AlphaTagFilter
         categories={data.allMdx.group}
-        selectedLabel={selectedLabel}
+        selectedTag={selectedLabel === DEFAULT_LABEL ? null : selectedLabel}
         onSelect={setSelectedLabel}
       />
       <ArticleSet
