@@ -1,6 +1,5 @@
-import * as React from "react";
 import { WorkExperienceRow } from "../WorkExperienceRow";
-import { row, rowLeft, rowRight } from "./style.module.css";
+import { rowLeft, rowRight } from "./style.module.css";
 
 export const WorkExperience = () => {
   return (

@@ -1,4 +1,3 @@
-import React from "react";
 import { copyLink } from "./style.module.css";
 
 export const Contact = () => {

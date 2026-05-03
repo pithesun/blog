@@ -1,5 +1,3 @@
-import * as React from "react";
-
 export const WorkExperienceRow = ({
   title,
   description,
@@ -16,16 +14,16 @@ export const WorkExperienceRow = ({
       <p>
         🔨 이슈와 실행내용 :{" "}
         <ul>
-          {issueList?.map((issue) => (
-            <li>{issue}</li>
+          {issueList?.map((issue, i) => (
+            <li key={`issue-${i}`}>{issue}</li>
           ))}
         </ul>
       </p>
       <p>
         📈 실행결과와 인사이트 :{" "}
         <ul>
-          {didlist?.map((did) => (
-            <li>{did}</li>
+          {didlist?.map((did, i) => (
+            <li key={`did-${i}`}>{did}</li>
           ))}
         </ul>
       </p>
@@ -33,8 +31,8 @@ export const WorkExperienceRow = ({
         <p>
           To do list :
           <ul>
-            {toDoList?.map((todo) => (
-              <li>{todo}</li>
+            {toDoList?.map((todo, i) => (
+              <li key={`todo-${i}`}>{todo}</li>
             ))}
           </ul>
         </p>

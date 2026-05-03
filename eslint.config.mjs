@@ -8,23 +8,25 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs,jsx}"],
     plugins: { js },
     extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser },
+    settings: { react: { version: "detect" } },
+  },
+  pluginReact.configs.flat.recommended,
+  {
     rules: {
       "react/react-in-jsx-scope": "off",
       "no-restricted-imports": [
         "error",
         {
-          patterns: [
+          paths: [
             {
-              group: ["react", "react-dom"],
-              message:
-                "React 17 이상에서는 React를 명시적으로 import할 필요가 없습니다.",
+              name: "react",
+              importNames: ["default"],
+              message: "React 17 이상에서는 React를 명시적으로 import할 필요가 없습니다.",
             },
           ],
         },
       ],
     },
-    languageOptions: { globals: globals.browser },
-    settings: { react: { version: "detect" } },
   },
-  pluginReact.configs.flat.recommended,
 ]);

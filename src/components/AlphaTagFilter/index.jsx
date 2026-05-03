@@ -1,17 +1,14 @@
-import React, { useState } from "react";
 import { DEFAULT_LABEL } from "../../constants";
 import { groupTagsByLetter } from "../../utils";
 import * as styles from "./style.module.css";
+import { useState, useMemo } from "react";
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export const AlphaTagFilter = ({ categories, selectedTag, onSelect }) => {
   const [selectedAlpha, setSelectedAlpha] = useState(null);
 
-  const grouped = React.useMemo(
-    () => groupTagsByLetter(categories),
-    [categories],
-  );
+  const grouped = useMemo(() => groupTagsByLetter(categories), [categories]);
   const activeLetters = new Set(Object.keys(grouped));
 
   const visibleGroups = selectedAlpha

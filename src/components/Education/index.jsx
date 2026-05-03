@@ -1,4 +1,3 @@
-import * as React from "react";
 import { row, rowLeft, rowRight } from "./style.module.css";
 
 export const Education = () => {

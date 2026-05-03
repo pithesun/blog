@@ -1,4 +1,3 @@
-import * as React from "react";
 import { graphql, useStaticQuery, withPrefix } from "gatsby";
 
 const Seo = ({ title }) => {

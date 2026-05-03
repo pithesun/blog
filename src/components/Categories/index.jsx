@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 
 import { CategoryLabel } from "../CategoryLabel";
 import { commonCategory } from "./style.module.css";
@@ -6,7 +6,7 @@ import { DEFAULT_LABEL } from "../../constants";
 import { filterCategories } from "../../utils";
 
 export const Categories = ({ categories, selectedLabel, onSelect }) => {
-  const refinedCategories = React.useMemo(() => {
+  const refinedCategories = useMemo(() => {
     return filterCategories(categories);
   }, [categories]);
 
@@ -14,6 +14,7 @@ export const Categories = ({ categories, selectedLabel, onSelect }) => {
     <div className={commonCategory}>
       {
         <CategoryLabel
+          key="default"
           categoryLabel={DEFAULT_LABEL}
           onSelect={onSelect}
           active={selectedLabel === DEFAULT_LABEL}
@@ -22,6 +23,7 @@ export const Categories = ({ categories, selectedLabel, onSelect }) => {
       {refinedCategories.map((category) => {
         return (
           <CategoryLabel
+            key={category}
             categoryLabel={category}
             onSelect={onSelect}
             active={selectedLabel === category}

@@ -1,9 +1,8 @@
-import React from "react";
 import { label, textWrapper, activeState } from "./style.module.css";
 import { DEFAULT_LABEL } from "../../constants";
 
 export const CategoryLabel = ({ categoryLabel, active, onSelect }) => {
-  const onClickLabel = (e) => {
+  const onClickLabel = () => {
     if (active) {
       onSelect(DEFAULT_LABEL);
       return;
